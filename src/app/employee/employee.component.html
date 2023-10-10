@@ -1,0 +1,42 @@
+<div class="container" *ngIf="!editedRecord">
+    <h2 class="text-center">Employee Details</h2>
+    <a routerLink="Add">Add Employee</a>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Employee Id</th>
+          <th>Employee Name</th>
+          <th>Employee Department</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let employee of employees">
+          <td>{{ employee.empId }}</td>
+          <td>{{ employee.empName }}</td>
+          <td>{{ employee.empDepartment }}</td>
+          <td>
+          <mat-icon (click)="editRecord(employee)" class="edit" class="text-primary">edit</mat-icon>
+          <mat-icon (click)="confirmDelete(employee)" class="delete" class="text-danger">delete</mat-icon>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  
+
+  <div *ngIf="editedRecord" class="edit-form">
+    <h2>Edit Record</h2>
+    <form (submit)="updateRecord()" class="form">
+      <div class="form-group">
+        <label for="editSymptoms">Employee Name:</label>
+        <input type="text" id="editSymptoms" [(ngModel)]="editedRecord.empName" name="symptoms" required>
+      </div>
+  
+      <div class="form-group">
+        <label for="editDiagnosis">Employee Department:</label>
+        <input type="text" id="editDiagnosis" [(ngModel)]="editedRecord.empDepartment" name="diagnosis" required>
+      </div>
+      <button type="submit" class="btn btn-primary">Save Changes</button>
+    </form>
+  </div>
